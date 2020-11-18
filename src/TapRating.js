@@ -7,15 +7,16 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Star from './components/Star'
 
+const defaultProps={
+  defaultRating: 3,
+  reviews: ["Terrible", "Bad", "Okay", "Good", "Great"],
+  count: 5,
+  showRating: true,
+  reviewColor: 'rgba(230, 196, 46, 1)',
+  reviewSize: 25
+}
 export default class TapRating extends Component {
-  static defaultProps = {
-    defaultRating: 3,
-    reviews: ["Terrible", "Bad", "Okay", "Good", "Great"],
-    count: 5,
-    showRating: true,
-    reviewColor: 'rgba(230, 196, 46, 1)',
-    reviewSize: 25
-  };
+  static defaultProps = defaultProps;
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { defaultRating } = nextProps;
@@ -29,20 +30,13 @@ export default class TapRating extends Component {
     return null;
   }
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
-      position: 5
+      position: props.defaultRating||defaultProps.defaultRating
     }
   }
-
-  componentDidMount() {
-    const { defaultRating } = this.props
-
-    this.setState({ position: defaultRating })
-  }
-
   renderStars(rating_array) {
     return _.map(rating_array, (star, index) => {
       return star
