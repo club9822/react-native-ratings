@@ -17,6 +17,7 @@ export default class Star extends PureComponent {
     this.state = {
       selected: false
     };
+    this.spring=this.spring.bind(this);
   }
 
   spring() {
@@ -43,7 +44,7 @@ export default class Star extends PureComponent {
     const starSource = fill && selectedColor === null ? STAR_SELECTED_IMAGE : STAR_IMAGE;
 
     return (
-      <TouchableOpacity activeOpacity={1} onPress={this.spring.bind( this )} disabled={isDisabled}>
+      <TouchableOpacity activeOpacity={1} onPress={this.spring} disabled={isDisabled}>
         <Animated.Image
           source={starSource}
           style={[
